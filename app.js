@@ -23,6 +23,8 @@ const express = require("express")
 
 const app = express()
 
+app.use(express.json())
+
 app.use((req, res, next) => {
     res.setHeader("Content-Type", "text/html; charset=utf-8");
     next();
@@ -34,6 +36,12 @@ app.get("/", (req, res) =>{
 
 app.get("/usuarios", (req,res) => {
     res.json(usuarios);
+})
+
+app.post("/usuarios", (req,res) => {
+    const novoUsuario = req.body
+    usuarios.push(novoUsuario)
+    res.status(201).json(novoUsuario)
 })
 
 app.listen(3000, () =>{
